@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amaro.microsservices.dto.UserDTO;
@@ -39,6 +40,13 @@ public class UserController {
 	public UserDTO findByCpf(@PathVariable String numCpf) {
 		return userService.findByCpf(numCpf);
 	}
+	
+	@GetMapping("/user/search")
+	public List<UserDTO> queryByName(@RequestParam(
+						name = "nome", required = true) 
+						String nome){
+		return userService.queryByName(nome);
+	}	
 	
 	@PutMapping("/user/{id}")
 	public UserDTO update(@RequestBody UserDTO userDTO, @PathVariable Long id) {

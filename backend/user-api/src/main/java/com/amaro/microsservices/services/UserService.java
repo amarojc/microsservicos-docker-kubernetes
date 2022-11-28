@@ -42,6 +42,11 @@ public class UserService {
 		return UserDTO.convert(user);
 	}
 
+	public List<UserDTO> queryByName(String nome){
+		List<User> user = userRepository.queryByNomeLike(nome + "%");
+		return user.stream().map(UserDTO::convert).collect(Collectors.toList());
+	}
+	
 	public UserDTO update(UserDTO userDTO, Long id) {
 		userDTO.setId(id);
 		UserDTO oldDTO = findById(userDTO.getId());
