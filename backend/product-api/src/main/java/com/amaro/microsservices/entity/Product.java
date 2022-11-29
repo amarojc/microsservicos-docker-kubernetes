@@ -3,19 +3,34 @@ package com.amaro.microsservices.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import com.amaro.microsservices.dto.ProductDTO;
 
-
+@Entity(name = "product")
 public class Product implements Serializable{
 
 	
 	private static final long serialVersionUID = 1L;
  
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private Float preco;
 	private String descricao;
+	
+	@Column(name = "product_identifier")
 	private String productIdentifier;
+	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
 	private Category category;
 	
 	public Product() {
