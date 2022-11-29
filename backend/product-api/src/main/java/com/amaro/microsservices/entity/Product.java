@@ -3,6 +3,8 @@ package com.amaro.microsservices.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.amaro.microsservices.dto.ProductDTO;
+
 
 public class Product implements Serializable{
 
@@ -121,4 +123,19 @@ public class Product implements Serializable{
 		this.category = category;
 	}
 	
+	public static Product convert(ProductDTO productDTO) {
+		Product product = new Product();
+		product.setId(productDTO.getId());
+		product.setNome(productDTO.getNome());
+		product.setPreco(productDTO.getPreco());
+		product.setDescricao(productDTO.getDescricao());
+		product.setProductIdentifier(productDTO.getProductIdentifier());
+		
+		if(product.getCategory() != null) {
+			product.setCategory(Category.convert(productDTO.getCategoryDTO()));
+		}
+		
+		return product;
+	}
+
 }

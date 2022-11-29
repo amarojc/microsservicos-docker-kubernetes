@@ -3,6 +3,8 @@ package com.amaro.microsservices.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.amaro.microsservices.dto.CategoryDTO;
+
 public class Category implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -61,6 +63,14 @@ public class Category implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public static Category convert(CategoryDTO categoryDTO) {
+		Category category = new Category();
+		category.setId(categoryDTO.getId());
+		category.setNome(categoryDTO.getNome());
+		
+		return category;
 	}
 	
 	
