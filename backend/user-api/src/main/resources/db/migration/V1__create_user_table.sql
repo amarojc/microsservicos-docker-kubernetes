@@ -7,6 +7,6 @@ create table users.user (
 	endereco varchar(100) not null,
 	email varchar(100) not null,
 	telefone varchar(100) not null,
-	data_cadastro timestamp not null,
-	key varchar(100) not null
+	key varchar(100) not null,
+	data_cadastro timestamp not null
 );
