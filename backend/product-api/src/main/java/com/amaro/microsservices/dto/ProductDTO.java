@@ -9,7 +9,7 @@ public class ProductDTO {
 	private Float preco;
 	private String descricao;
 	private String productIdentifier;
-	private CategoryDTO categoryDTO;
+	private CategoryDTO category;
 
 	
 	public Long getId() {
@@ -52,12 +52,13 @@ public class ProductDTO {
 		this.productIdentifier = productIdentifier;
 	}
 
-	public CategoryDTO getCategoryDTO() {
-		return categoryDTO;
+	
+	public CategoryDTO getCategory() {
+		return category;
 	}
 
-	public void setCategoryDTO(CategoryDTO categoryDTO) {
-		this.categoryDTO = categoryDTO;
+	public void setCategory(CategoryDTO category) {
+		this.category = category;
 	}
 
 	public static ProductDTO convert(Product product) {
@@ -69,7 +70,7 @@ public class ProductDTO {
 		productDTO.setProductIdentifier(product.getProductIdentifier());
 		
 		if(product.getCategory() != null) {
-			productDTO.setCategoryDTO(CategoryDTO.convert(product.getCategory()));
+			productDTO.setCategory(CategoryDTO.convert(product.getCategory()));
 		}
 		
 		return productDTO;

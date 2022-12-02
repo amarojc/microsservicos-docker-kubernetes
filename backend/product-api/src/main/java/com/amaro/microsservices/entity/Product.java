@@ -146,8 +146,8 @@ public class Product implements Serializable{
 		product.setDescricao(productDTO.getDescricao());
 		product.setProductIdentifier(productDTO.getProductIdentifier());
 		
-		if(product.getCategory() != null) {
-			product.setCategory(Category.convert(productDTO.getCategoryDTO()));
+		if(productDTO.getCategory() != null) {
+			product.setCategory(Category.convert(productDTO.getCategory()));
 		}
 		
 		return product;
