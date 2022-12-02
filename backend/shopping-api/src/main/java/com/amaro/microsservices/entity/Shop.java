@@ -3,6 +3,9 @@ package com.amaro.microsservices.entity;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import com.amaro.microsservices.dto.ShopDTO;
 
 public class Shop {
 
@@ -106,6 +109,21 @@ public class Shop {
 
 	public void setItens(List<Item> itens) {
 		this.itens = itens;
+	}
+	
+	public static Shop convert(ShopDTO shopDTO) {
+		Shop shop = new Shop();
+		shop.setId(shopDTO.getId());
+		shop.setUserIdentifier(shopDTO.getUserIdentifier());
+		shop.setDate(shopDTO.getDate());
+		shop.setTotal(shopDTO.getTotal());
+		shop.setItens(
+					  shopDTO.getItens().stream()
+					  .map(Item::convert)
+					  .collect(Collectors.toList())
+					  );
+		return shop;
+		
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.amaro.microsservices.entity;
 
+import com.amaro.microsservices.dto.ItemDTO;
+
 //Classe dependente da classe Shop... 
 public class Item {
 	
@@ -31,4 +33,11 @@ public class Item {
 		this.price = price;
 	}
 	
+	public static Item convert(ItemDTO itemDTO) {
+		Item item = new Item();
+		item.setPrice(itemDTO.getPrice());
+		item.setProdutIdentifier(itemDTO.getProdutIdentifier());
+		
+		return item;
+	}
 }
