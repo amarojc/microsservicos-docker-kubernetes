@@ -1,11 +1,17 @@
 package com.amaro.microsservices.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 import com.amaro.microsservices.dto.ItemDTO;
 
 //Classe dependente da classe Shop... 
+@Embeddable
 public class Item {
 	
+	@Column(name="product_identifier")
 	private String produtIdentifier;
+	
 	private Float price;
 	
 	public Item() {

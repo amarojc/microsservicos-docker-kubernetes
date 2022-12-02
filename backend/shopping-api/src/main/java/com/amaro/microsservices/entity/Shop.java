@@ -5,15 +5,36 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
 import com.amaro.microsservices.dto.ShopDTO;
 
+@Entity(name="shop")
 public class Shop {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name="user_identifier")
 	private String userIdentifier;
 	private Float total;
 	private Date date;
 
+	//Eager -> Recuperando a coleção de itens junto com a entity principal Shop... 
+	//Lazy -> Recupera somente quando for chamada
+	@ElementCollection(fetch = FetchType.EAGER)
+	//Definindo a tabela que contem os itens e a coluna join à tabela shop
+	@CollectionTable(name = "item", 
+				joinColumns = @JoinColumn(name = "shop_id"))
 	private List<Item> itens;
 
 	public Shop() {
