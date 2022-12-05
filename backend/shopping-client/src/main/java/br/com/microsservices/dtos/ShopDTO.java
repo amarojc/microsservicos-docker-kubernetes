@@ -3,11 +3,16 @@ package br.com.microsservices.dtos;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ShopDTO {
 	
 	private String userIdentifier;
 	private Float total;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date date;
+	
 	private List<ItemDTO> itens;
 
 	public String getUserIdentifier() {

@@ -2,6 +2,8 @@ package br.com.microsservices.dtos;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class UserDTO {
 
 	private String nome;
@@ -10,6 +12,8 @@ public class UserDTO {
 	private String endereco;
 	private String email;
 	private String telefone;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataCadastro;
 
 	public String getNome() {
