@@ -10,25 +10,25 @@ import com.amaro.microsservices.dto.ItemDTO;
 public class Item {
 	
 	@Column(name="product_identifier")
-	private String produtIdentifier;
+	private String productIdentifier;
 	
 	private Float price;
 	
 	public Item() {
 	}
 	
-	public Item(String produtIdentifier, Float price) {
+	public Item(String productIdentifier, Float price) {
 		super();
-		this.produtIdentifier = produtIdentifier;
+		this.productIdentifier = productIdentifier;
 		this.price = price;
 	}
 
-	public String getProdutIdentifier() {
-		return produtIdentifier;
+	public String getProductIdentifier() {
+		return productIdentifier;
 	}
 
-	public void setProdutIdentifier(String produtIdentifier) {
-		this.produtIdentifier = produtIdentifier;
+	public void setProductIdentifier(String productIdentifier) {
+		this.productIdentifier = productIdentifier;
 	}
 
 	public Float getPrice() {
@@ -42,7 +42,7 @@ public class Item {
 	public static Item convert(ItemDTO itemDTO) {
 		Item item = new Item();
 		item.setPrice(itemDTO.getPrice());
-		item.setProdutIdentifier(itemDTO.getProdutIdentifier());
+		item.setProductIdentifier(itemDTO.getProductIdentifier());
 		
 		return item;
 	}

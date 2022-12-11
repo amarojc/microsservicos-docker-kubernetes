@@ -4,15 +4,15 @@ import com.amaro.microsservices.entity.Item;
 
 public class ItemDTO {
 
-	private String produtIdentifier;
+	private String productIdentifier;
 	private Float price;
 
-	public String getProdutIdentifier() {
-		return produtIdentifier;
+	public String getProductIdentifier() {
+		return productIdentifier;
 	}
 
-	public void setProdutIdentifier(String produtIdentifier) {
-		this.produtIdentifier = produtIdentifier;
+	public void setProductIdentifier(String productIdentifier) {
+		this.productIdentifier = productIdentifier;
 	}
 
 	public Float getPrice() {
@@ -26,8 +26,8 @@ public class ItemDTO {
 	public static ItemDTO convert(Item item) {
 		ItemDTO itemDTO = new ItemDTO();
 		itemDTO.setPrice(item.getPrice());
-		itemDTO.setProdutIdentifier(item.getProdutIdentifier());
+		itemDTO.setProductIdentifier(item.getProductIdentifier());
 		
-		return itemDTO;
+		return itemDTO; 
 	}
 }

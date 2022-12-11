@@ -15,6 +15,9 @@ public interface ShopRepository extends JpaRepository<Shop, Long>{
 	//Lista todas as compras maiores que o valor no parametro.
 	public List<Shop> findAllByTotalGreaterThan(Float total);
 	
+	//Lista todas as compras realizadas igual ou maior que a data informada	
+	public List<Shop> findAllByDateGreaterThanEqual(Date date);
+	
 	//Lista todas as compras realizadas antes da data informada.
 	public List<Shop> findAllByDateLessThanEqual(Date date);
 	
