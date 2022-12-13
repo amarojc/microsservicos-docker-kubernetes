@@ -1,5 +1,8 @@
 package com.amaro.microsservices.dto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class ShopReportDTO {
 
 	private Integer count;
@@ -15,7 +18,8 @@ public class ShopReportDTO {
 	}
 
 	public Double getTotal() {
-		return total;
+		BigDecimal bg = new BigDecimal((Double) total).setScale(2, RoundingMode.HALF_EVEN);
+		return bg.doubleValue();
 	}
 
 	public void setTotal(Double total) {
@@ -23,7 +27,8 @@ public class ShopReportDTO {
 	}
 
 	public Double getMean() {
-		return mean;
+		BigDecimal bg = new BigDecimal((Double) mean).setScale(2, RoundingMode.HALF_EVEN);
+		return bg.doubleValue();
 	}
 
 	public void setMean(Double mean) {

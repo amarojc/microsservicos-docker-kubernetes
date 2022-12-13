@@ -1,5 +1,7 @@
 package com.amaro.microsservices.entity;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -109,7 +111,12 @@ public class Shop {
 	}
 
 	public Float getTotal() {
-		return total;
+		/* Formatando o valor para ser exibido de forma mais eficaz, com apenas 2 casas decimais,
+		    arredondo o valor mais próximo para cima/baixo, após retorno o valor para o tipo double formatado.
+		*/
+		BigDecimal bg = new BigDecimal((Float) total).setScale(2, RoundingMode.HALF_EVEN);
+		
+		return bg.floatValue();
 	}
 
 	public void setTotal(Float total) {
