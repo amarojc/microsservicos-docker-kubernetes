@@ -1,10 +1,20 @@
 package br.com.microsservices.dtos;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ProductDTO {
 
+	@NotBlank
 	private String productIdentifier;
+	
+	@NotBlank
 	private String nome;
+	
+	@NotNull
 	private Float preco;
+	
+	@NotNull
 	private CategoryDTO category;
 
 	public String getProductIdentifier() {

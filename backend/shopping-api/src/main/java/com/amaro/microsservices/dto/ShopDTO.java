@@ -4,15 +4,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.amaro.microsservices.entity.Shop;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ShopDTO {
 
 	private Long id;
+	
+	@NotBlank
 	private String userIdentifier;
+	
+	@NotNull
 	private Float total;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@NotNull
 	private Date date;
 
+	@NotNull
 	private List<ItemDTO> itens;
 
 	public Long getId() {

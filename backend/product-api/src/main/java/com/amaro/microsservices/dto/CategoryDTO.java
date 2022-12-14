@@ -1,10 +1,16 @@
 package com.amaro.microsservices.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.amaro.microsservices.entity.Category;
 
 public class CategoryDTO {
 	
+	@NotNull
 	private Long id;
+	
+	@NotBlank
 	private String nome;
 
 	public Long getId() {

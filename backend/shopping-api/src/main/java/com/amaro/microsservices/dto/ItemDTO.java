@@ -1,10 +1,16 @@
 package com.amaro.microsservices.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.amaro.microsservices.entity.Item;
 
 public class ItemDTO {
 
+	@NotBlank
 	private String productIdentifier;
+	
+	@NotNull
 	private Float price;
 
 	public String getProductIdentifier() {

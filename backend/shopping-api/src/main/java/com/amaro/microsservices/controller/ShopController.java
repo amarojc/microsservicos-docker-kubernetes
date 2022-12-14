@@ -2,6 +2,8 @@ package com.amaro.microsservices.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +23,7 @@ public class ShopController {
 	private ShopService shopService;
 
 	@PostMapping()
-	public ShopDTO newShop(@RequestBody ShopDTO shopDTO) {
+	public ShopDTO newShop(@Valid @RequestBody ShopDTO shopDTO) {
 		return shopService.save(shopDTO);				
 	}
 	

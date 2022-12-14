@@ -2,6 +2,8 @@ package com.amaro.microsservices.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,7 @@ public class ProductController {
 	private ProductService productService;
 	
 	@PostMapping("/product")
-	public ProductDTO newProduct(@RequestBody ProductDTO productDTO) {
+	public ProductDTO newProduct(@RequestBody @Valid ProductDTO productDTO) {
 		return productService.save(productDTO); 
 	}
 	
@@ -46,7 +48,8 @@ public class ProductController {
 	}
 
 	@PutMapping("/product/{productIdentifier}")
-	public ProductDTO update(@RequestBody ProductDTO productDTO, @PathVariable String productIdentifier) {
+	public ProductDTO update(@RequestBody @Valid ProductDTO productDTO,
+																@PathVariable String productIdentifier) {
 		return productService.update(productDTO, productIdentifier);
 	}
 
