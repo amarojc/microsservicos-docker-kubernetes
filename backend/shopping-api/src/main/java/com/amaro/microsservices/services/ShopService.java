@@ -7,9 +7,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amaro.microsservices.dto.ItemDTO;
 import com.amaro.microsservices.dto.ShopDTO;
 import com.amaro.microsservices.entity.Shop;
 import com.amaro.microsservices.repositories.ShopRepository;
+
+import br.com.microsservices.dtos.ProductDTO;
+import br.com.microsservices.dtos.UserDTO;
 
 @Service
 public class ShopService {
@@ -17,7 +21,21 @@ public class ShopService {
 	@Autowired
 	private ShopRepository shopRepository;
 	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private UserService userService;
+	
 	public ShopDTO save(ShopDTO shopDTO) {
+		if(userService.getByUserCpf(shopDTO.getUserIdentifier()) == null) {
+			return null;
+		}
+		
+		if(!validateProducts(shopDTO.getItens())) {
+			return null;
+		}
+		
 		shopDTO.setTotal(shopDTO
 							.getItens()
 							.stream()
@@ -33,8 +51,12 @@ public class ShopService {
 	}
 	
 	public List<ShopDTO> findAllByUserIdentifier(String userIdentifier){
-		List<Shop> shops = shopRepository.findAllByUserIdentifier(userIdentifier);
-		return shops.stream().map(ShopDTO::convert).collect(Collectors.toList());
+		UserDTO userDTO = userService.getByUserCpf(userIdentifier);
+		if(userDTO != null) {
+			List<Shop> shops = shopRepository.findAllByUserIdentifier(userDTO.getCpf());
+			return shops.stream().map(ShopDTO::convert).collect(Collectors.toList());
+		}
+		return null;
 	}
 	
 	public List<ShopDTO> getByDateGreaterThanEqual(ShopDTO shopDTO){
@@ -56,4 +78,17 @@ public class ShopService {
 		List<Shop> shops = shopRepository.findAllByTotalGreaterThan(shopDTO.getTotal());
 		return shops.stream().map(ShopDTO::convert).collect(Collectors.toList());		
 	}
+	
+	private boolean validateProducts(List<ItemDTO> itens) {
+		for (ItemDTO item : itens) {
+			ProductDTO prodDTO = productService.getProductByIdentifier(item.getProductIdentifier());
+			if(prodDTO == null) {
+				return false;
+			}else {
+				item.setPrice(prodDTO.getPreco());
+			}
+		}
+		return true;
+	}
+	
 }
