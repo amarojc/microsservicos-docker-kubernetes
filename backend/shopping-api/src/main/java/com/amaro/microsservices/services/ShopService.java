@@ -15,79 +15,87 @@ import br.com.microsservices.dtos.ItemDTO;
 import br.com.microsservices.dtos.ProductDTO;
 import br.com.microsservices.dtos.ShopDTO;
 import br.com.microsservices.dtos.UserDTO;
+import br.com.microsservices.exception.ShopNotFoundException;
 
 @Service
 public class ShopService {
 
 	@Autowired
 	private ShopRepository shopRepository;
-	
+
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	public ShopDTO save(ShopDTO shopDTO) {
-		if(userService.getByUserCpf(shopDTO.getUserIdentifier()) == null) {
+		if (userService.getByUserCpf(shopDTO.getUserIdentifier()) == null) {
 			return null;
 		}
-		
+
 		validateProducts(shopDTO.getItens());
-		
-		shopDTO.setTotal(shopDTO
-							.getItens()
-							.stream()
-							.map(x -> x.getPrice())
-							.reduce((float) 0, Float::sum)
-						);
+
+		shopDTO.setTotal(shopDTO.getItens().stream().map(x -> x.getPrice()).reduce((float) 0, Float::sum));
 		Shop shop = Shop.convert(shopDTO);
 		shop.setDate(new Date());
-		
+
 		shop = shopRepository.save(shop);
-		
+
 		return DTOConverter.convert(shop);
 	}
-	
-	public List<ShopDTO> findAllByUserIdentifier(String userIdentifier){
+
+	public List<ShopDTO> findAllByUserIdentifier(String userIdentifier) {
 		UserDTO userDTO = userService.getByUserCpf(userIdentifier);
-		if(userDTO != null) {
-			List<Shop> shops = shopRepository.findAllByUserIdentifier(userDTO.getCpf());
+		List<Shop> shops = shopRepository.findAllByUserIdentifier(userDTO.getCpf());
+		if(!shops.isEmpty()) {
 			return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
 		}
-		return null;
+		throw new ShopNotFoundException();
 	}
-	
-	public List<ShopDTO> getByDateGreaterThanEqual(ShopDTO shopDTO){
+
+	public List<ShopDTO> getByDateGreaterThanEqual(ShopDTO shopDTO) {
 		List<Shop> shops = shopRepository.findAllByDateGreaterThanEqual(shopDTO.getDate());
-		return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		if (!shops.isEmpty()) {
+			return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		}
+		throw new ShopNotFoundException();
 	}
-	
-	public List<ShopDTO> getByDateLessThanEqual(ShopDTO shopDTO){
+
+	public List<ShopDTO> getByDateLessThanEqual(ShopDTO shopDTO) {
 		List<Shop> shops = shopRepository.findAllByDateLessThanEqual(shopDTO.getDate());
-		return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		if (!shops.isEmpty()) {
+			return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		}
+		throw new ShopNotFoundException();
 	}
-	
-	public List<ShopDTO> getTop30ByDateGreaterThanEqual(ShopDTO shopDTO){
+
+	public List<ShopDTO> getTop30ByDateGreaterThanEqual(ShopDTO shopDTO) {
 		List<Shop> shops = shopRepository.findTop30ByDateGreaterThanEqual(shopDTO.getDate());
-		return  shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		if (!shops.isEmpty()) {
+			return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		}
+		throw new ShopNotFoundException();
 	}
-	
-	public List<ShopDTO> findAllByTotalGreaterThan(ShopDTO shopDTO){
+
+	public List<ShopDTO> findAllByTotalGreaterThan(ShopDTO shopDTO) {
 		List<Shop> shops = shopRepository.findAllByTotalGreaterThan(shopDTO.getTotal());
-		return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());		
+		if(!shops.isEmpty()) {
+			return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		}
+		throw new ShopNotFoundException();
 	}
-	
+
 	private boolean validateProducts(List<ItemDTO> itens) {
 		for (ItemDTO item : itens) {
 			ProductDTO prodDTO = productService.getProductByIdentifier(item.getProductIdentifier());
-			if(prodDTO == null) {
+			if (prodDTO == null) {
 				return false;
-			}else {
+			} else {
 				item.setPrice(prodDTO.getPreco());
 			}
 		}
 		return true;
 	}
-	
+
 }

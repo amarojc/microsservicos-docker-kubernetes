@@ -13,6 +13,7 @@ import com.amaro.microsservices.repositories.ReportRepositoryImpl;
 
 import br.com.microsservices.dtos.ShopDTO;
 import br.com.microsservices.dtos.ShopReportDTO;
+import br.com.microsservices.exception.ShopNotFoundException;
 
 @Service
 public class ReportService {
@@ -22,10 +23,13 @@ public class ReportService {
 	
 	public List<ShopDTO> getShopsByFilter(Date dataInicio, Date dataFim, Float valorMinimo){
 		List<Shop> shops = reportRepositoryImpl.getShopByFilters(dataInicio, dataFim, valorMinimo);
-		return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		if(!shops.isEmpty()) {
+			return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		}
+		throw new ShopNotFoundException();
 	}
 	
 	public ShopReportDTO getReportByDate(Date dataInicio, Date dataFim) {
-		return reportRepositoryImpl.getReportByDate(dataInicio, dataFim);
+		   return  reportRepositoryImpl.getReportByDate(dataInicio, dataFim);
 	}
 }

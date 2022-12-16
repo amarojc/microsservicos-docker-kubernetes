@@ -9,9 +9,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.amaro.microsservices.dto.UserDTO;
+import com.amaro.microsservices.converter.DTOConverter;
 import com.amaro.microsservices.entity.User;
 import com.amaro.microsservices.repositories.UserRepository;
+
+import br.com.microsservices.dtos.UserDTO;
+import br.com.microsservices.exception.UserNotFoundException;
 
 @Service
 public class UserService {
@@ -24,48 +27,52 @@ public class UserService {
 		userDTO.setDataCadastro(new Date());
 		userDTO.setKey(UUID.randomUUID().toString());// Gera chave de acesso
 		User user = userRepository.save(User.convert(userDTO));
-		return UserDTO.convert(user);
+		return DTOConverter.convert(user);
 	}
 
 	public List<UserDTO> findAll() {
 		List<User> user = userRepository.findAll();
-		return user.stream().map(UserDTO::convert).collect(Collectors.toList());
+		return user.stream().map(DTOConverter::convert).collect(Collectors.toList());
 	}
 
 	public UserDTO findById(Long id) {
 		Optional<User> user = userRepository.findById(id);
-		return UserDTO.convert(user.get());
+		if (user.isPresent()) {
+			return DTOConverter.convert(user.get());
+		}
+		throw new UserNotFoundException();
 	}
 
 	public UserDTO findByCpf(String cpf) {
 		User user = userRepository.findByCpf(cpf);
-		return UserDTO.convert(user);
+		if (user != null) {
+			return DTOConverter.convert(user);
+		}
+		throw new UserNotFoundException();
 	}
 
-	public List<UserDTO> queryByName(String nome){
+	public List<UserDTO> queryByName(String nome) {
 		List<User> user = userRepository.queryByNomeLike(nome + "%");
-		return user.stream().map(UserDTO::convert).collect(Collectors.toList());
+		if(!user.isEmpty()) {
+		return user.stream().map(DTOConverter::convert).collect(Collectors.toList());
+		}
+		throw new UserNotFoundException();
 	}
-	
+
 	public UserDTO update(UserDTO userDTO, Long id) {
 		userDTO.setId(id);
 		UserDTO oldDTO = findById(userDTO.getId());
-		if (oldDTO != null) {
-			userDTO.setDataCadastro(oldDTO.getDataCadastro());
-			userDTO.setKey(oldDTO.getKey());
-			if (oldDTO.getKey() == null) {
-				userDTO.setKey(UUID.randomUUID().toString());
-			}
+		userDTO.setDataCadastro(oldDTO.getDataCadastro());
+		userDTO.setKey(oldDTO.getKey());
+		if (oldDTO.getKey() == null) {
+			userDTO.setKey(UUID.randomUUID().toString());
 		}
-		return UserDTO.convert(userRepository.save(User.convert(userDTO)));
+		return DTOConverter.convert(userRepository.save(User.convert(userDTO)));
 	}
-	
+
 	public String delete(Long id) {
 		UserDTO userDTO = findById(id);
-		if(userDTO != null) {
-			userRepository.delete(User.convert(userDTO));
-			return "O Usuário, " + userDTO.getNome() + " foi excluido com sucesso!";
-		}
-		return null;
+		userRepository.delete(User.convert(userDTO));
+		return "O Usuário, " + userDTO.getNome() + " foi excluido com sucesso!";
 	}
 }

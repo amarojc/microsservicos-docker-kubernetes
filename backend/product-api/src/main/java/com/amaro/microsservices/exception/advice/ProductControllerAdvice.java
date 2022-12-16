@@ -13,10 +13,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.microsservices.dtos.ErrorDTO;
+import br.com.microsservices.exception.CategoryNotFoundException;
+import br.com.microsservices.exception.ProductNotFoundException;
 
 @ControllerAdvice(basePackages = "com.amaro.microsservices.controller")
 public class ProductControllerAdvice {
 
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(ProductNotFoundException.class)
+	public ErrorDTO handlerProductNotFound(ProductNotFoundException exception) {
+		ErrorDTO errorDTO = new ErrorDTO();
+		errorDTO.setStatus(HttpStatus.NOT_FOUND.value());
+		errorDTO.setMessage("Produto informado não localizado!");
+		errorDTO.setTimestamp(new Date());
+		return errorDTO;
+	}
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(CategoryNotFoundException.class)
+	public ErrorDTO handlerCategoryNotFound(CategoryNotFoundException exception) {
+		ErrorDTO errorDTO = new ErrorDTO();
+		errorDTO.setStatus(HttpStatus.NOT_FOUND.value());
+		errorDTO.setMessage("Categoria não localizada");
+		errorDTO.setTimestamp(new Date());
+		return errorDTO;
+	}
+	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)

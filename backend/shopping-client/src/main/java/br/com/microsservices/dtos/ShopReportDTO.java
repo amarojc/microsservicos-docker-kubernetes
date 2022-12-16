@@ -8,7 +8,7 @@ public class ShopReportDTO {
 	private Integer count;
 	private Double total;
 	private Double mean;
-
+	
 	public Integer getCount() {
 		return count;
 	}
@@ -18,8 +18,14 @@ public class ShopReportDTO {
 	}
 
 	public Double getTotal() {
-		BigDecimal bg = new BigDecimal((Double) total).setScale(2, RoundingMode.HALF_EVEN);
-		return bg.doubleValue();
+		//Evitando error de JsonMappingException
+		if(this.total != null) {
+			BigDecimal bg = new BigDecimal((Double) total).setScale(2, RoundingMode.HALF_EVEN);
+			return bg.doubleValue();
+		}
+		total = 0.;
+		
+		return total;
 	}
 
 	public void setTotal(Double total) {
@@ -27,8 +33,12 @@ public class ShopReportDTO {
 	}
 
 	public Double getMean() {
-		BigDecimal bg = new BigDecimal((Double) mean).setScale(2, RoundingMode.HALF_EVEN);
-		return bg.doubleValue();
+		if(this.mean != null) {
+			BigDecimal bg = new BigDecimal((Double) mean).setScale(2, RoundingMode.HALF_EVEN);
+			return bg.doubleValue();
+		}
+		mean =0.;
+		return mean;
 	}
 
 	public void setMean(Double mean) {
