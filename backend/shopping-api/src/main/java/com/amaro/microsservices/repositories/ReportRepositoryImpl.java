@@ -8,8 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.amaro.microsservices.dto.ShopReportDTO;
 import com.amaro.microsservices.entity.Shop;
+
+import br.com.microsservices.dtos.ShopReportDTO;
 
 public class ReportRepositoryImpl implements ReportRepository {
 	//Objeto para fazar conexão com o banco de dados

@@ -3,8 +3,9 @@ package com.amaro.microsservices.repositories;
 import java.util.Date;
 import java.util.List;
 
-import com.amaro.microsservices.dto.ShopReportDTO;
 import com.amaro.microsservices.entity.Shop;
+
+import br.com.microsservices.dtos.ShopReportDTO;
 
 public interface ReportRepository {
 

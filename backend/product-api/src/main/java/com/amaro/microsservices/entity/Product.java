@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.amaro.microsservices.dto.ProductDTO;
+import br.com.microsservices.dtos.ProductDTO;
 
 @Entity(name = "product")
 public class Product implements Serializable{

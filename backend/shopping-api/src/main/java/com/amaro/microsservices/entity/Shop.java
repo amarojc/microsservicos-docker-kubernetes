@@ -17,7 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
-import com.amaro.microsservices.dto.ShopDTO;
+import br.com.microsservices.dtos.ShopDTO;
 
 @Entity(name="shop")
 public class Shop {

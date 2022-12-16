@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.amaro.microsservices.dto.CategoryDTO;
+import br.com.microsservices.dtos.CategoryDTO;
 
 @Entity(name = "category")
 public class Category implements Serializable{

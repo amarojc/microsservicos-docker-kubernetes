@@ -1,7 +1,7 @@
 package com.amaro.microsservices.converter;
 
-import com.amaro.microsservices.dto.CategoryDTO;
-import com.amaro.microsservices.dto.ProductDTO;
+import br.com.microsservices.dtos.CategoryDTO;
+import br.com.microsservices.dtos.ProductDTO;
 import com.amaro.microsservices.entity.Category;
 import com.amaro.microsservices.entity.Product;
 
@@ -20,8 +20,9 @@ public class DTOConverter {
 		productDTO.setId(product.getId());
 		productDTO.setNome(product.getNome());
 		productDTO.setPreco(product.getPreco());
+		productDTO.setDescricao(product.getDescricao());
 		productDTO.setProductIdentifier(product.getProductIdentifier());
-		if(productDTO.getCategory() != null) {
+		if(product.getCategory() != null) {
 			productDTO.setCategory(
 					DTOConverter.convert(product.getCategory()));
 		}

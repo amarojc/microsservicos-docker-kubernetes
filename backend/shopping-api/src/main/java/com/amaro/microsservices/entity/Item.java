@@ -3,7 +3,7 @@ package com.amaro.microsservices.entity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import com.amaro.microsservices.dto.ItemDTO;
+import br.com.microsservices.dtos.ItemDTO;
 
 //Classe dependente da classe Shop... 
 @Embeddable

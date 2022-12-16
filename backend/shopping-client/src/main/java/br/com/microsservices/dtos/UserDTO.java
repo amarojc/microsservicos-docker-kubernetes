@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class UserDTO {
 
+	private Long id;
 	private String nome;
 	private String cpf;
 	private String key;
@@ -15,6 +16,15 @@ public class UserDTO {
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataCadastro;
+
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;

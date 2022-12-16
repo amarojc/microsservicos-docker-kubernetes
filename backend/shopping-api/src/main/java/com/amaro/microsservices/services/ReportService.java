@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amaro.microsservices.converter.DTOConverter;
-import com.amaro.microsservices.dto.ShopDTO;
-import com.amaro.microsservices.dto.ShopReportDTO;
 import com.amaro.microsservices.entity.Shop;
 import com.amaro.microsservices.repositories.ReportRepositoryImpl;
+
+import br.com.microsservices.dtos.ShopDTO;
+import br.com.microsservices.dtos.ShopReportDTO;
 
 @Service
 public class ReportService {

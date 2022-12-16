@@ -2,10 +2,11 @@ package com.amaro.microsservices.converter;
 
 import java.util.stream.Collectors;
 
-import com.amaro.microsservices.dto.ItemDTO;
-import com.amaro.microsservices.dto.ShopDTO;
 import com.amaro.microsservices.entity.Item;
 import com.amaro.microsservices.entity.Shop;
+
+import br.com.microsservices.dtos.ItemDTO;
+import br.com.microsservices.dtos.ShopDTO;
 
 public class DTOConverter {
 	

@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amaro.microsservices.dto.ShopDTO;
-import com.amaro.microsservices.dto.ShopReportDTO;
 import com.amaro.microsservices.services.ReportService;
+
+import br.com.microsservices.dtos.ShopDTO;
+import br.com.microsservices.dtos.ShopReportDTO;
 
 @RestController
 @RequestMapping(value = "shopping")

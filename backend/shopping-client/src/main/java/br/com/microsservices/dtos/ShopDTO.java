@@ -10,18 +10,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ShopDTO {
 	
+	private Long id;
+	
 	@NotBlank
 	private String userIdentifier;
 	
-	@NotNull
 	private Float total;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
-	@NotNull
 	private Date date;
 	
 	@NotNull
 	private List<ItemDTO> itens;
+
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUserIdentifier() {
 		return userIdentifier;

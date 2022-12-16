@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amaro.microsservices.dto.ProductDTO;
 import com.amaro.microsservices.services.ProductService;
+
+import br.com.microsservices.dtos.ProductDTO;
 
 @RestController
 public class ProductController {

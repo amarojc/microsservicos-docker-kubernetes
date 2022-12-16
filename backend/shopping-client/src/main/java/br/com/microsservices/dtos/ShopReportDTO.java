@@ -1,4 +1,4 @@
-package com.amaro.microsservices.dto;
+package br.com.microsservices.dtos;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

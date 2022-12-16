@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amaro.microsservices.dto.UserDTO;
 import com.amaro.microsservices.services.UserService;
+
+import br.com.microsservices.dtos.UserDTO;
 
 @RestController
 public class UserController {
