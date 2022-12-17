@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amaro.microsservices.services.ShopService;
@@ -24,13 +26,15 @@ public class ShopController {
 	private ShopService shopService;
 
 	@PostMapping()
-	public ShopDTO newShop(@Valid @RequestBody ShopDTO shopDTO) {
-		return shopService.save(shopDTO);				
+	public ShopDTO newShop(@Valid @RequestBody ShopDTO shopDTO,
+			@RequestHeader(name = "key" , required = true) String key ) {
+		return shopService.save(shopDTO, key);				
 	}
 	
 	@GetMapping("/shopsByUser/{userIdentifier}")
-	public List<ShopDTO> getByShopsUser(@PathVariable String userIdentifier){
-		return shopService.findAllByUserIdentifier(userIdentifier);
+	public List<ShopDTO> getByShopsUser(@PathVariable String userIdentifier,
+			@RequestHeader(name = "key", required = true) String key){
+		return shopService.findAllByUserIdentifier(userIdentifier, key);
 	}
 
 	@GetMapping("/totalShopGreater")

@@ -8,7 +8,6 @@ import com.amaro.microsservices.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 
-	User findByCpf(String cpf);
 	
 	User findByCpfAndKey(String cpf, String key);
 	

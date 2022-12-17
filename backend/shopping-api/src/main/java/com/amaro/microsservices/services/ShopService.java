@@ -29,10 +29,9 @@ public class ShopService {
 	@Autowired
 	private UserService userService;
 
-	public ShopDTO save(ShopDTO shopDTO) {
-		if (userService.getByUserCpf(shopDTO.getUserIdentifier()) == null) {
-			return null;
-		}
+	public ShopDTO save(ShopDTO shopDTO, String key) {
+		System.out.println("user: " + shopDTO.getUserIdentifier() + " - Key:" + key);
+		userService.getByUserCpfAndKey(shopDTO.getUserIdentifier(), key);
 
 		validateProducts(shopDTO.getItens());
 
@@ -45,8 +44,8 @@ public class ShopService {
 		return DTOConverter.convert(shop);
 	}
 
-	public List<ShopDTO> findAllByUserIdentifier(String userIdentifier) {
-		UserDTO userDTO = userService.getByUserCpf(userIdentifier);
+	public List<ShopDTO> findAllByUserIdentifier(String userIdentifier, String key) {
+		UserDTO userDTO = userService.getByUserCpfAndKey(userIdentifier, key);
 		List<Shop> shops = shopRepository.findAllByUserIdentifier(userDTO.getCpf());
 		if(!shops.isEmpty()) {
 			return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());
