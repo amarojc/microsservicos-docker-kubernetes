@@ -1,0 +1,52 @@
+# especificação do docker-compose
+version: "4.15.0"
+services:
+ postgres:
+  # nome e versão da imagem
+  image: postgres:latest
+  # porta do contêiner : porta da máquina local
+  ports:
+    - "5432:5432"
+  # definindo as variáveis de ambiente 
+  environment:
+    POSTGRES_DB: dev
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+
+ user:
+  image: loja/user-api
+  ports:
+    - "8080:8080"
+  environment:
+    POSTGRES_URL: jdbc:postgresql://postgres:5432/dev
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+  # Indica que o serviço depende da imagem do Postgres para executar
+  depends_on:
+    - postgres
+
+ product:
+   image: loja/product-api
+   ports:
+     - "8081:8081"
+   environment:
+    POSTGRES_URL: jdbc:postgresql://postgres:5432/dev
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+   depends_on:
+     - postgres
+
+ shopping:
+   image: loja/shopping-api
+   ports:
+     - "8082:8082"
+   environment:
+     POSTGRES_URL: jdbc:postgresql://postgres:5432/dev
+     POSTGRES_USER: postgres
+     POSTGRES_PASSWORD: postgres
+     # URL de acesso aos demais serviços
+     USER_API_URL: http://user:8080
+     PRODUCT_API_URL: http://product:8081
+     SHOPPING_API_URL: http://shopping:8082
+   depends_on:
+     - postgres	
