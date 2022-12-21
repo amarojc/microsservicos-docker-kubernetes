@@ -1,0 +1,31 @@
+# Criando uma conta de serviço para o usuário com acesso total ao cluster.
+# Atenção: Está ação não é uma boa prática para um cluster em produção, ela facilita bastante
+# o gerenciamente do cluster em um ambiente de desenvolvimento.
+
+# Para mais informações, acesse a documentação: 
+# https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+
+# Dica: Para indentar o arquivo YAML, não utilize a tecla fixa/tab, utilize espaços.
+
+# Conta loja-admin
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: loja-admin
+  namespace: kubernetes-dashboard
+---
+# Associando a conta com um papel dentro do cluster
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: loja-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  # Permitindo acesso total ao cluster
+  kind: ClusterRole
+  name: cluster-admin
+  # Definindo o usuário que terá o acesso total
+subjects:
+ - kind: ServiceAccount
+   name: loja-admin
+   namespace: kubernetes-dashboard

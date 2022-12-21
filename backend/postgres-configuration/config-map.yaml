@@ -1,0 +1,9 @@
+# Config para manter os dados de conexão com o banco de dados Postgres.
+kind: ConfigMap
+apiVersion: v1
+metadata:
+ name: postgres-configmap
+data:
+ database_url: jdbc:postgresql://postgres:5432/dev
+ database_user: postgres
+ database_password: postgres

@@ -1,0 +1,14 @@
+# Service para o deployment do postgres 
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    run: postgres
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+  selector:
+    app: postgres
