@@ -44,7 +44,7 @@ Java 11
 
 ## Camada de Dados
 - Flywaydb
-- No gerenciamento de migrações do banco de dados, mantendo as mudanças dos modelos de dados versionadas e reproduzíveis.
+No gerenciamento de migrações do banco de dados, mantendo as mudanças dos modelos de dados versionadas e reproduzíveis.
 
 
 # Autor
