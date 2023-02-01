@@ -1,0 +1,574 @@
+{
+	"info": {
+		"_postman_id": "39836ad7-7ed1-4ede-af2e-4537940ca4bb",
+		"name": "microsservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22656568"
+	},
+	"item": [
+		{
+			"name": "product-api",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/products",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"productIdentifier\":\"lego-city\",\r\n\"nome\": \"Super lego city\",\r\n\"preco\": 1200.0,\r\n\"descricao\": \"Conjunto lego city com 200 peças para você usar a sua imaginação\",\r\n\"category\": \r\n    {\r\n        \"id\": 3,\r\n        \"nome\": \"Brinquedos\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/product/",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/product/cod/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"product",
+								"cod",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByProductIdentifier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/product/notebook-dell-i5",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"product",
+								"notebook-dell-i5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllProductsByCategoryId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/products/category/3",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"products",
+								"category",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost/product/12",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"product",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"productIdentifier\": \"notebook-dell-i5\",\r\n    \"nome\": \"Dell Ispirion i5\",\r\n    \"preco\": 2998.0,\r\n    \"descricao\": \"Inspirion Intel Core i5 prata\",\r\n    \"category\": {\r\n        \"id\": 5,\r\n        \"nome\": \"Informática\"\r\n    }\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/product/notebook-dell-i5",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"product",
+								"notebook-dell-i5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shopping-api",
+			"item": [
+				{
+					"name": "newShop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "key",
+								"value": "da95edf5-5b4f-4393-ae33-d62278de634a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userIdentifier\":\"123\",\r\n    \"itens\":[\r\n        {\r\n           \"productIdentifier\": \"smart-tv-lg-50\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/shopping/",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"shopping",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByDateLessThan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"07/01/2023\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/shopping/shopByDateLessThan",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"shopping",
+								"shopByDateLessThan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getShopsThirty",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"01/01/2023\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/shopping/find30ShopsByDate",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"shopping",
+								"find30ShopsByDate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByDateGreaterThan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"01/01/2023\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/shopping/shopByDateGreaterThan",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"shopping",
+								"shopByDateGreaterThan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByShopsUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "key",
+								"value": "da95edf5-5b4f-4393-ae33-d62278de634a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/shopping/shopsByUser/123",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"shopping",
+								"shopsByUser",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getShopsByFilter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/shopping/search?dataInicio=01/01/2023&dataFim=07/01/2023&valorMinimo=11000.00\n",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"shopping",
+								"search"
+							],
+							"query": [
+								{
+									"key": "dataInicio",
+									"value": "01/01/2023"
+								},
+								{
+									"key": "dataFim",
+									"value": "07/01/2023"
+								},
+								{
+									"key": "valorMinimo",
+									"value": "11000.00\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReportByDate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/shopping/report?dataInicio=01/01/2023&dataFim=07/01/2023",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"shopping",
+								"report"
+							],
+							"query": [
+								{
+									"key": "dataInicio",
+									"value": "01/01/2023"
+								},
+								{
+									"key": "dataFim",
+									"value": "07/01/2023"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTotalShopGreater",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"total\": 9198\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/shopping/totalShopGreater",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"shopping",
+								"totalShopGreater"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user-api",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/users",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"cpf\":\"895\",\r\n\"nome\": \"Angel\",\r\n\"endereco\":\"Rua A\",\r\n\"email\":\"angel@email.com\",\r\n\"telefone\":\"1515-9898\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/user",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost/5",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"cpf\":\"321\",\r\n\"nome\":\"Kiko\",\r\n\"endereco\":\"Estrada k\",\r\n\"email\":\"kiko@email.com\",\r\n\"telefone\":\"2235-4252\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/user/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/user/3",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "queryByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/user/search?nome=Kik",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								"search"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Kik"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByCpfAndKey",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/user/cpf/321?key=8d8a52bc-e1ad-4449-8a65-95e7a7ced2d7",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								"cpf",
+								"321"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "8d8a52bc-e1ad-4449-8a65-95e7a7ced2d7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
